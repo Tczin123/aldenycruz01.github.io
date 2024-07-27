@@ -34,4 +34,58 @@
 
         button {
             font-size: 1em;
-            padding: 10px 2
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .love-button {
+            background-color: #ff5c5c;
+            color: white;
+        }
+
+        .not-love-button {
+            background-color: #cccccc;
+            color: black;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Eu te amo</h1>
+        <div class="buttons">
+            <button class="love-button">Eu te amo</button>
+            <button class="not-love-button" id="notLoveBtn">Eu não te amo</button>
+        </div>
+    </div>
+    <script>
+        const notLoveBtn = document.getElementById('notLoveBtn');
+        const container = notLoveBtn.parentElement;
+
+        function moveButton() {
+            const containerRect = container.getBoundingClientRect();
+            const buttonRect = notLoveBtn.getBoundingClientRect();
+
+            let newLeft = Math.random() * (window.innerWidth - buttonRect.width);
+            let newTop = Math.random() * (window.innerHeight - buttonRect.height);
+
+            if (newLeft > containerRect.width - buttonRect.width) {
+                newLeft = containerRect.width - buttonRect.width;
+            }
+            if (newTop > containerRect.height - buttonRect.height) {
+                newTop = containerRect.height - buttonRect.height;
+            }
+
+            notLoveBtn.style.left = `${newLeft}px`;
+            notLoveBtn.style.top = `${newTop}px`;
+        }
+
+        notLoveBtn.addEventListener('mouseover', moveButton);
+    </script>
+</body>
+
+</html>
