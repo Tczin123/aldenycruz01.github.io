@@ -4,87 +4,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eu te amo</title>
+    <title>Te Amo</title>
     <style>
-        body,
-        html {
-            height: 100%;
-            margin: 0;
+        body {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: pink;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
+            height: 100vh;
+            background-color: #000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 3rem;
             margin-bottom: 20px;
         }
 
-        .buttons {
-            margin-top: 20px;
-            position: relative;
+        .button-container {
+            display: flex;
+            gap: 20px;
+            /* Espaçamento entre os botões */
         }
 
         button {
-            font-size: 1em;
+            font-size: 1.5rem;
             padding: 10px 20px;
-            margin: 10px;
             cursor: pointer;
-            border: none;
-            border-radius: 5px;
         }
 
-        .love-button {
-            background-color: #ff5c5c;
-            color: white;
+        #heart {
+            color: red;
+            font-size: 2rem;
+            margin-top: 20px;
         }
 
-        .not-love-button {
-            background-color: #cccccc;
-            color: black;
+        #naoTeAmo {
             position: absolute;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Eu te amo</h1>
-        <div class="buttons">
-            <button class="love-button">Eu te amo</button>
-            <button class="not-love-button" id="notLoveBtn">Eu não te amo</button>
-        </div>
+    <h1>Te Amo</h1>
+    <div class="button-container">
+        <button id="teAmo">Eu te amo</button>
+        <button id="naoTeAmo">Não te amo</button>
     </div>
+    <div id="heart"></div>
     <script>
-        const notLoveBtn = document.getElementById('notLoveBtn');
-        const container = notLoveBtn.parentElement;
+        const teAmoButton = document.getElementById('teAmo');
+        const naoTeAmoButton = document.getElementById('naoTeAmo');
+        const heartDiv = document.getElementById('heart');
 
-        function moveButton() {
-            const containerRect = container.getBoundingClientRect();
-            const buttonRect = notLoveBtn.getBoundingClientRect();
+        teAmoButton.addEventListener('click', () => {
+            heartDiv.textContent += '❤️';
+        });
 
-            let newLeft = Math.random() * (window.innerWidth - buttonRect.width);
-            let newTop = Math.random() * (window.innerHeight - buttonRect.height);
+        naoTeAmoButton.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - naoTeAmoButton.clientWidth);
+            const y = Math.random() * (window.innerHeight - naoTeAmoButton.clientHeight);
+            naoTeAmoButton.style.left = `${x}px`;
+            naoTeAmoButton.style.top = `${y}px`;
+        });
 
-            if (newLeft > containerRect.width - buttonRect.width) {
-                newLeft = containerRect.width - buttonRect.width;
-            }
-            if (newTop > containerRect.height - buttonRect.height) {
-                newTop = containerRect.height - buttonRect.height;
-            }
-
-            notLoveBtn.style.left = `${newLeft}px`;
-            notLoveBtn.style.top = `${newTop}px`;
-        }
-
-        notLoveBtn.addEventListener('mouseover', moveButton);
+        naoTeAmoButton.addEventListener('click', () => {
+            const x = Math.random() * (window.innerWidth - naoTeAmoButton.clientWidth);
+            const y = Math.random() * (window.innerHeight - naoTeAmoButton.clientHeight);
+            naoTeAmoButton.style.left = `${x}px`;
+            naoTeAmoButton.style.top = `${y}px`;
+        });
     </script>
 </body>
 
