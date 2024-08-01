@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Garrafão</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 0 auto 20px auto;
+            display: block;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 0 auto;
+            display: block;
+            background-color: #87CEFA;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:active {
+            background-color: #5DADE2;
+        }
+
+        .gold-button {
+            display: none;
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 20px auto 0 auto;
+            display: block;
+            background-color: #FFD700;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        button:disabled {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calculadora de Garrafão</h1>
+        <label for="garafao">Quantidade de Garrafão por semana:</label>
+        <input type="number" id="garafao" placeholder="Digite a quantidade de Garrafão" oninput="validarCampos()">
+        <label for="valor">Valor por Garrafão:</label>
+        <input type="number" id="valor" placeholder="Digite o valor por Garrafão" oninput="validarCampos()">
+        <button id="calcular" onclick="calcular()" disabled>Calcular</button>
+        <div class="result" id="resultado"></div>
+        <div class="result" id="resultado-anual"></div>
+        <button class="gold-button" id="surpresa" onclick="enviarMensagem()">🎩 Tenho uma surpresa para você!</button>
+    </div>
+    <script>
+        function validarCampos() {
+            const garafao = document.getElementById('garafao').value;
+            const valor = document.getElementById('valor').value;
+            const botaoCalcular = document.getElementById('calcular');
+
+            if (garafao && valor) {
+                botaoCalcular.disabled = false;
+            } else {
+                botaoCalcular.disabled = true;
+            }
+        }
+
+        function calcular() {
+            const garafao = document.getElementById('garafao').value;
+            const valor = document.getElementById('valor').value;
+            const resultado = garafao * valor;
+            const semanasAno = 52;
+            const resultadoAnual = resultado * semanasAno;
+
+            document.getElementById('resultado').innerText = `Gasto por semana: R$ ${resultado.toFixed(2)} 😢`;
+            document.getElementById('resultado-anual').innerText = `Gasto anual: R$ ${resultadoAnual.toFixed(2)} 💸`;
+
+            const surpresaButton = document.getElementById('surpresa');
+            surpresaButton.style.display = 'none';
+
+            setTimeout(() => {
+                surpresaButton.style.display = 'block';
+            }, 3000);
+        }
+
+        function enviarMensagem() {
+            const numeroWhatsApp = '+558532545200';
+            const mensagem = '"Ei Superzon, me salva! Esse Garrafão está furando meu bolso!"';
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+            window.open(url, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('surpresa').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
